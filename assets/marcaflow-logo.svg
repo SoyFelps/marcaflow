@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="76" viewBox="0 0 360 76" role="img" aria-labelledby="title desc">
+  <title id="title">MarcaFlow</title>
+  <desc id="desc">Símbolo verde com um M em fluxo e o nome MarcaFlow.</desc>
+  <defs>
+    <linearGradient id="brandGradient" x1="8" y1="6" x2="62" y2="68" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#39C451"/>
+      <stop offset="1" stop-color="#14852A"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="72" height="72" rx="22" fill="url(#brandGradient)"/>
+  <path d="M18 51V25h8l10 13 10-13h8v26h-8V37L36 51 26 37v14h-8Z" fill="#fff"/>
+  <path d="M54 51h-8l-4.5-7.2 4.2-5.5L54 51Z" fill="#B9F2BE"/>
+  <text x="88" y="48" fill="#17231A" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-1.2">MarcaFlow</text>
+  <path d="M276 59c21-2 39-11 52-26" fill="none" stroke="#25A634" stroke-width="4" stroke-linecap="round"/>
+  <path d="m319 28 10 5-10 5" fill="none" stroke="#25A634" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
