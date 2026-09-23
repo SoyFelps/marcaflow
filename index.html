@@ -63,7 +63,7 @@
     .nav { display: grid; gap: 4px; }
     .nav-item {
       width: 100%; display: flex; align-items: center; gap: 11px; padding: 10px 11px; border: 0; border-radius: 11px;
-      color: #667568; background: transparent; text-align: left; font-size: 13px; transition: .18s ease;
+      color: #667568; background: transparent; text-align: left; font-size: 13px; text-decoration: none; transition: .18s ease;
     }
     .nav-item svg { width: 17px; height: 17px; stroke-width: 1.8; }
     .nav-item:hover { color: var(--primary-dark); background: var(--primary-100); }
@@ -300,7 +300,7 @@
       <div class="sidebar-label">Workspace</div>
       <nav class="nav">
         <button class="nav-item active" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Pipeline <span class="nav-badge" id="navCount">0</span></button>
-        <button class="nav-item" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Não protocolados</button>
+        <a class="nav-item" href="nao-protocolados.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Não protocolados <span class="nav-badge" id="pendingNavCount">0</span></a>
         <button class="nav-item" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5M4 19h16"/><path d="m7 15 3-4 3 2 5-7"/></svg>Visão geral</button>
         <button class="nav-item" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3v18M18 3v18M3 7h6M15 17h6M3 12h18"/></svg>Relatórios</button>
         <button class="nav-item" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="3"/><path d="M5 21a7 7 0 0 1 14 0"/></svg>Leads</button>
@@ -440,24 +440,29 @@
       save();
     }
 
-    function renderStats(filtered = processes) {
-      const active = processes.filter(p => p.stage !== 'concedido').length;
-      const pendingDocs = processes.filter(p => p.checklist.some(item => !item.done)).length;
-      const completeDocs = processes.filter(p => p.checklist.length && p.checklist.every(item => item.done)).length;
-      const done = processes.filter(p => p.stage === 'concedido').length;
+    function renderStats(filtered = pipelineProcesses()) {
+      const base = pipelineProcesses();
+      const active = base.filter(p => p.stage !== 'concedido').length;
+      const pendingDocs = base.filter(p => p.checklist.some(item => !item.done)).length;
+      const completeDocs = base.filter(p => p.checklist.length && p.checklist.every(item => item.done)).length;
+      const done = base.filter(p => p.stage === 'concedido').length;
       $('#stats').innerHTML = `
-        <div class="stat"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></div><span class="stat-label">Total de processos</span><strong class="stat-value">${processes.length}</strong><span class="stat-meta positive">↗ ${filtered.length === processes.length ? 'base atualizada' : filtered.length + ' encontrados'}</span></div>
+        <div class="stat"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></div><span class="stat-label">Total de processos</span><strong class="stat-value">${base.length}</strong><span class="stat-meta positive">↗ ${filtered.length === base.length ? 'base atualizada' : filtered.length + ' encontrados'}</span></div>
         <div class="stat"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div><span class="stat-label">Em andamento</span><strong class="stat-value">${active}</strong><span class="stat-meta">em 5 etapas de análise</span></div>
         <div class="stat"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h14v16H5z"/><path d="m8 12 2.5 2.5L16 9"/></svg></div><span class="stat-label">Documentação pendente</span><strong class="stat-value">${pendingDocs}</strong><span class="stat-meta ${pendingDocs ? 'warning' : 'positive'}">${completeDocs} com checklist completo</span></div>
         <div class="stat"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="9"/></svg></div><span class="stat-label">Registros concedidos</span><strong class="stat-value">${done}</strong><span class="stat-meta positive">pipeline concluído</span></div>`;
-      $('#navCount').textContent = processes.length;
+      $('#navCount').textContent = base.length;
+      const pendingNavCount = $('#pendingNavCount');
+      if (pendingNavCount) pendingNavCount.textContent = processes.filter(p => p.stage === 'nao_protocolado').length;
     }
+
+    function pipelineProcesses() { return processes.filter(p => p.stage !== 'nao_protocolado'); }
 
     function filteredProcesses() {
       const query = ($('#searchInput').value || '').trim().toLowerCase();
       const priority = $('#priorityFilter').value;
       const sort = $('#sortSelect').value;
-      let list = processes.filter(p => {
+      let list = pipelineProcesses().filter(p => {
         const matchesQuery = !query || [p.client, p.mark, p.protocol, p.classNumber].some(v => String(v).toLowerCase().includes(query));
         return matchesQuery && (priority === 'all' || p.priority === priority);
       });
@@ -468,7 +473,7 @@
     function renderBoard() {
       const list = filteredProcesses();
       renderStats(list);
-      $('#visibleCount').textContent = list.length !== processes.length ? `· ${list.length} visíveis` : '';
+      $('#visibleCount').textContent = list.length !== pipelineProcesses().length ? `· ${list.length} visíveis` : '';
       $('#footerCount').textContent = list.length;
       $('#board').innerHTML = STAGES.map(stage => {
         const cards = list.filter(p => p.stage === stage.id);
