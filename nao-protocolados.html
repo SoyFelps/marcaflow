@@ -45,6 +45,9 @@
 
   .help-action{display:inline-block;padding:0;border:0;color:#187b25;background:transparent;font-family:inherit;font-size:11px;font-weight:800;line-height:normal;text-decoration:none;cursor:pointer;}
   .help-action:hover{color:#145f1d;}
+
+  .restore-examples{display:block;width:100%;padding:0 3px;margin:0 3px 12px;border:0;color:#708074;background:transparent;text-align:left;font-family:inherit;font-size:10px;font-weight:700;cursor:pointer;}
+  .restore-examples:hover{color:#187b25;}
   </style>
 </head>
 <body>
@@ -59,7 +62,7 @@
         <a class="nav-item" href="relatorios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3v18M18 3v18M3 7h6M15 17h6M3 12h18"/></svg>Relatórios</a>
         <a class="nav-item" href="leads.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="3"/><path d="M5 21a7 7 0 0 1 14 0"/></svg>Leads <span class="nav-badge" id="leadCount">0</span></a>
       </nav>
-      <div class="sidebar-label">Suporte</div><nav class="nav"><button class="nav-item" id="helpButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg>Central de ajuda</button></nav><div class="spacer"></div><div class="help"><div class="spark">✦</div><strong>Organize cada processo</strong><p>O MarcaFlow mantém clientes, etapas e documentos em um só lugar.</p><button class="help-action" id="howButton" type="button">Como funciona →</button></div><div class="user"><div class="avatar">RC</div><div><strong>Rafaela Costa</strong><span>Admin · MarcaFlow</span></div><button class="dots" type="button">•••</button></div></aside>
+      <div class="sidebar-label">Suporte</div><nav class="nav"><button class="nav-item" id="helpButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg>Central de ajuda</button></nav><div class="spacer"></div><button class="restore-examples" id="restoreExamplesButton" type="button">Restaurar dados de exemplo</button><div class="help"><div class="spark">✦</div><strong>Organize cada processo</strong><p>O MarcaFlow mantém clientes, etapas e documentos em um só lugar.</p><button class="help-action" id="howButton" type="button">Como funciona →</button></div><div class="user"><div class="avatar">RC</div><div><strong>Rafaela Costa</strong><span>Admin · MarcaFlow</span></div><button class="dots" type="button">•••</button></div></aside>
     <main class="main">
       <header class="topbar"><button class="mobile-menu" id="menuButton" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div class="breadcrumb"><span>Workspace</span><span>›</span><strong>Não protocolados</strong></div><div class="top-actions"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="searchInput" type="search" placeholder="Buscar cliente ou marca..." autocomplete="off" /></div></div></header>
       <section class="content"><div class="page-heading"><div><div class="eyebrow">Entrada de operação</div><h1>Não protocolados</h1><p>Cadastre e organize clientes que ainda não foram enviados para a pipeline. Quando estiver tudo pronto, mova o cliente para <strong>Pedido protocolado</strong>.</p></div><div class="heading-actions"><button class="secondary-btn" id="exportButton" type="button">Exportar lista</button><button class="primary-btn" id="newButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>Incluir cliente</button></div></div>
@@ -101,6 +104,9 @@
 
 function updateLeadMenuCount(){try{const raw=localStorage.getItem('marca-direta-leads-v1');const count=raw?JSON.parse(raw).length:0;const badge=document.getElementById('leadCount');if(badge)badge.textContent=count}catch{}}
 updateLeadMenuCount();window.addEventListener('storage',updateLeadMenuCount);
+
+function restoreExampleData(){localStorage.removeItem('marca-direta-marcaflow-v1');localStorage.removeItem('marca-direta-leads-v1');localStorage.removeItem('marca-direta-leads-demo-seeded-v1');localStorage.removeItem('marca-direta-pending-demo-seeded-v1');localStorage.removeItem('marca-direta-leads-view-v1');window.location.href='index.html';}
+$('#restoreExamplesButton')?.addEventListener('click',restoreExampleData);
 </script>
 </body>
 </html>
