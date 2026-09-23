@@ -31,6 +31,17 @@
     .toast { position:fixed; z-index:80; right:22px; bottom:22px; max-width:340px; padding:12px 15px; border:1px solid #cfe8d1; border-radius:11px; color:#2f6136; background:#f4fcf4; box-shadow:var(--shadow); font-size:11px; font-weight:700; transform:translateY(20px); opacity:0; pointer-events:none; transition:.22s; } .toast.show { transform:none; opacity:1; }
     @media(max-width:1250px){:root{--sidebar:218px}.content{padding-left:25px;padding-right:25px}.topbar{padding-left:25px;padding-right:25px}} @media(max-width:940px){:root{--sidebar:0px}.sidebar{transform:translateX(-100%);transition:transform .2s;box-shadow:var(--shadow)}.sidebar.open{transform:none}.main{width:100%;margin-left:0}.mobile-menu{display:grid;place-items:center;width:32px;height:32px;padding:0}.stats{grid-template-columns:repeat(3,1fr)}} @media(max-width:650px){.topbar{height:62px;padding:0 15px}.breadcrumb{display:none}.top-actions{width:100%}.search{width:auto;flex:1}.top-actions .primary-btn{width:37px;padding:0;font-size:0}.content{padding:23px 15px 34px}.page-heading{display:block}.heading-actions{margin-top:17px}.heading-actions .primary-btn{flex:1}.stats{grid-template-columns:1fr;gap:9px;margin-bottom:18px}.toolbar{flex-wrap:wrap}.toolbar strong{width:100%}.form-grid,.detail-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal-backdrop{padding:10px}.modal-head,.modal-body,.modal-foot,.detail-banner,.detail-section{padding-left:16px;padding-right:16px}}
     .brand-logo{display:block;width:190px;height:auto;max-width:100%;}
+
+  .nav-item{font-family:inherit;}
+  .spacer{flex:1;}
+  .help{padding:14px;margin:16px 3px 12px;border:1px solid #d8edd9;border-radius:14px;background:linear-gradient(145deg,#f0fbf1,#fff);}
+  .help .spark{color:#25a634;margin-bottom:9px;}
+  .help strong{display:block;font-size:12px;}
+  .help p{margin:5px 0 12px;color:#708074;font-size:11px;line-height:1.45;}
+  .help button{padding:0;border:0;color:#187b25;background:transparent;font-size:11px;font-weight:800;}
+  .user{display:flex;align-items:center;gap:9px;padding:11px 8px 0;border-top:1px solid #e4ebe5;}
+  .user strong{display:block;font-size:11px;}
+  .user span{display:block;margin-top:2px;color:#708074;font-size:10px;}
   </style>
 </head>
 <body>
@@ -45,9 +56,7 @@
         <a class="nav-item" href="relatorios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3v18M18 3v18M3 7h6M15 17h6M3 12h18"/></svg>Relatórios</a>
         <a class="nav-item" href="leads.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="3"/><path d="M5 21a7 7 0 0 1 14 0"/></svg>Leads <span class="nav-badge" id="leadCount">0</span></a>
       </nav>
-      <div class="sidebar-label">Suporte</div><nav class="nav"><button class="nav-item" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg>Central de ajuda</button></nav>
-      <div class="sidebar-spacer"></div><div class="help-card"><div class="spark">✦</div><strong>Organize cada processo</strong><p>O MarcaFlow mantém clientes, etapas e documentos em um só lugar.</p><button id="helpButton" type="button">Como funciona →</button></div><div class="user-mini"><div class="avatar">RC</div><div><strong>Rafaela Costa</strong><span>Admin · MarcaFlow</span></div><button class="dots" type="button">•••</button></div>
-    </aside>
+      <div class="sidebar-label">Suporte</div><nav class="nav"><button class="nav-item" id="helpButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg>Central de ajuda</button></nav><div class="spacer"></div><div class="help"><div class="spark">✦</div><strong>Organize cada processo</strong><p>O MarcaFlow mantém clientes, etapas e documentos em um só lugar.</p><button id="howButton" type="button">Como funciona →</button></div><div class="user"><div class="avatar">RC</div><div><strong>Rafaela Costa</strong><span>Admin · MarcaFlow</span></div><button class="dots" type="button">•••</button></div></aside>
     <main class="main">
       <header class="topbar"><button class="mobile-menu" id="menuButton" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div class="breadcrumb"><span>Workspace</span><span>›</span><strong>Não protocolados</strong></div><div class="top-actions"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="searchInput" type="search" placeholder="Buscar cliente ou marca..." autocomplete="off" /></div></div></header>
       <section class="content"><div class="page-heading"><div><div class="eyebrow">Entrada de operação</div><h1>Não protocolados</h1><p>Cadastre e organize clientes que ainda não foram enviados para a pipeline. Quando estiver tudo pronto, mova o cliente para <strong>Pedido protocolado</strong>.</p></div><div class="heading-actions"><button class="secondary-btn" id="exportButton" type="button">Exportar lista</button><button class="primary-btn" id="newButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>Incluir cliente</button></div></div>
