@@ -321,7 +321,7 @@
         <div class="top-actions">
           <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="searchInput" type="search" placeholder="Buscar marca ou cliente..." autocomplete="off" /></div>
           <button class="icon-btn" type="button" title="Notificações"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i class="notif-dot"></i></button>
-          <button class="primary-btn" id="newTopButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg><span>Novo processo</span></button>
+
         </div>
       </header>
 
@@ -579,7 +579,7 @@
       processes = processes.filter(x => x.id !== pendingDeleteId);
       save(); pendingDeleteId = null; closeModal('deleteModal'); closeModal('formModal'); renderBoard(); showToast(`Processo “${p.mark}” excluído.`);
     });
-    $('#newButton').addEventListener('click', () => openForm()); $('#newTopButton').addEventListener('click', () => openForm()); $('#exportButton').addEventListener('click', exportView);
+    $('#newButton').addEventListener('click', () => openForm()); $('#exportButton').addEventListener('click', exportView);
     $('#searchInput').addEventListener('input', renderBoard); $('#priorityFilter').addEventListener('change', renderBoard); $('#sortSelect').addEventListener('change', renderBoard);
     $('#helpButton').addEventListener('click', () => showToast('Arraste os cards entre as etapas ou clique para ver os documentos e detalhes.'));
     $('#menuButton').addEventListener('click', () => $('#sidebar').classList.toggle('open'));
