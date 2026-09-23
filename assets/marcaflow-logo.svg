@@ -11,6 +11,4 @@
   <path d="M18 51V25h8l10 13 10-13h8v26h-8V37L36 51 26 37v14h-8Z" fill="#fff"/>
   <path d="M54 51h-8l-4.5-7.2 4.2-5.5L54 51Z" fill="#B9F2BE"/>
   <text x="88" y="48" fill="#17231A" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-1.2">MarcaFlow</text>
-  <path d="M276 59c21-2 39-11 52-26" fill="none" stroke="#25A634" stroke-width="4" stroke-linecap="round"/>
-  <path d="m319 28 10 5-10 5" fill="none" stroke="#25A634" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
